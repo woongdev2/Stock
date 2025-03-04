@@ -1,0 +1,14 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.WoongStock" parent="Theme.Material3.Light.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="android:statusBarColor">@android:color/white</item>
+        <!-- 아이콘을 어둡게 표시하여 흰색 배경에서 잘 보이도록 설정 -->
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:fontFamily">@font/nanum</item>
+        <item name="colorAccent">@color/main_color</item>
+        <item name="colorPrimary">@color/main_color</item>
+    </style>
+
+</resources>

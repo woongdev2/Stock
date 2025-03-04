@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="viewModel"
+            type="com.teamox.woongstock.viewmodel.InventoryRegistrationViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<androidx.constraintlayout.widget.ConstraintLayout
+    style="@style/Basic_layout">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:visibility="gone"
+        style="@style/Basic_actionbar"
+        android:id="@+id/action_bar_section"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <androidx.appcompat.widget.AppCompatImageButton
+            style="@style/toolbar_image_btn"
+            android:id="@+id/iv_close"
+            android:src="@drawable/cross_20"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent" />
+        <androidx.appcompat.widget.AppCompatTextView
+            style="@style/Basic_title"
+            android:text="제품 등록"
+            android:layout_marginLeft="10dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/iv_close"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/div_color"
+            app:layout_constraintBottom_toBottomOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/section_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        app:layout_constraintTop_toBottomOf="@id/action_bar_section">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_intro_title"
+            android:text="제품명을\n입력해주세요"
+            android:textSize="28dp"
+            android:textColor="@color/black"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_intro_sub_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="제품명이 뭔가요?"
+            android:textSize="15dp"
+            android:textColor="@color/search_gray"
+            app:layout_constraintTop_toBottomOf="@id/tv_intro_title"
+            app:layout_constraintLeft_toLeftOf="parent"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:animateLayoutChanges="true"
+        app:layout_constraintTop_toBottomOf="@id/section_title">
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:visibility="gone"
+            android:id="@+id/ib_camera"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@color/transparent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Register_text_input_layout"
+            android:id="@+id/text_input_layout_quantity"
+            android:visibility="gone"
+            android:hint="제품 수량"
+            android:layout_marginTop="30dp"
+            app:layout_constraintTop_toBottomOf="@id/ib_camera"
+            app:layout_constraintLeft_toLeftOf="parent">
+            <com.google.android.material.textfield.TextInputEditText
+                style="@style/Register_text_input_edittext"
+                android:id="@+id/et_quantity"
+                android:inputType="number"
+                android:imeOptions="actionDone"
+                android:text="@={viewModel.quantity}"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:visibility="gone"
+            style="@style/Register_text_input_layout"
+            android:id="@+id/text_input_layout_price"
+            android:layout_marginTop="30dp"
+            android:hint="제품 가격"
+            app:layout_constraintTop_toBottomOf="@+id/text_input_layout_quantity"
+            app:layout_constraintLeft_toLeftOf="parent">
+            <com.google.android.material.textfield.TextInputEditText
+                style="@style/Register_text_input_edittext"
+                android:id="@+id/et_price"
+                android:inputType="number"
+                android:imeOptions="actionNext"
+                android:text="@={viewModel.price}"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Register_text_input_layout"
+            android:id="@+id/text_input_layout_title"
+            android:layout_marginTop="30dp"
+            android:hint="제품 이름"
+            android:layout_marginBottom="50dp"
+            app:layout_constraintTop_toBottomOf="@+id/text_input_layout_price"
+            app:layout_constraintLeft_toLeftOf="parent">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_title"
+                style="@style/Register_text_input_edittext"
+                android:imeOptions="actionNext"
+                android:text="@={viewModel.name}"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
+        <androidx.appcompat.widget.AppCompatButton
+            android:visibility="gone"
+            android:id="@+id/btn_confirm"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:background="@drawable/rounded_button"
+            android:backgroundTint="#3F51B5"
+            android:textColor="@color/white"
+            android:textSize="18dp"
+            android:fontFamily="@font/nanumextrabold"
+            android:onClick="@{(view) -> viewModel.onClickButton()}"
+            android:text="확인"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginBottom="30dp"
+            app:layout_constraintBottom_toBottomOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">웅이상회</string>
+    <string name="product_name">제품 이름<font color='#ff0000'>*</font></string>
+</resources>
