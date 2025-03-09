@@ -8,48 +8,176 @@
             type="com.teamox.woongstock.viewmodel.ProductRegistrationViewModel" />
     </data>
 
-    <androidx.appcompat.widget.LinearLayoutCompat
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <androidx.appcompat.widget.LinearLayoutCompat
-            android:layout_marginTop="50dp"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:gravity="center">
-            <androidx.appcompat.widget.AppCompatImageButton
-                android:id="@+id/ib_camera"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:background="@color/black"
-                app:layout_constraintTop_toTopOf="parent"
+        android:layout_height="match_parent">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            style="@style/Basic_actionbar"
+            android:id="@+id/action_bar_section"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/Basic_title"
+                android:text="제품 등록"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"/>
-        </androidx.appcompat.widget.LinearLayoutCompat>
-
-        <androidx.appcompat.widget.LinearLayoutCompat
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:orientation="horizontal"
-            android:layout_marginTop="30dp">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="제품명"/>
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/Register_text_input_layout"
-                android:id="@+id/text_input_layout_quantity"
-                android:hint="제품 수량"
-                app:layout_constraintTop_toBottomOf="@id/ib_camera"
-                app:layout_constraintLeft_toLeftOf="parent">
-                <com.google.android.material.textfield.TextInputEditText
-                    style="@style/Register_text_input_edittext"
-                    android:id="@+id/et_quantity"
-                    android:inputType="number"
-                    android:imeOptions="actionDone"/>
-            </com.google.android.material.textfield.TextInputLayout>
-        </androidx.appcompat.widget.LinearLayoutCompat>
+            android:layout_height="match_parent"
+            android:layout_marginTop="56dp">
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:paddingBottom="100dp">
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_marginTop="30dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:gravity="center">
+                    <androidx.appcompat.widget.AppCompatImageButton
+                        android:id="@+id/ib_camera"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:background="@color/transparent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"/>
+                </androidx.appcompat.widget.LinearLayoutCompat>
 
-    </androidx.appcompat.widget.LinearLayoutCompat>
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    style="@style/RegisterShortLinearLayoutStyle"
+                    android:layout_marginTop="60dp">
+                    <androidx.appcompat.widget.AppCompatTextView
+                        style="@style/RegisterSubTopic"
+                        android:text="기본 정보"/>
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        style="@style/RegisterLinearLayoutStyle"
+                        android:layout_marginTop="30dp">
+                        <TextView
+                            style="@style/RegisterTitleStyle"
+                            android:text="제품명"/>
+                        <androidx.appcompat.widget.AppCompatEditText
+                            style="@style/RegisterEdittextStyle"
+                            android:id="@+id/et_title"
+                            android:inputType="text"
+                            android:text="@={viewModel.title}"
+                            android:hint="제품명 입력"/>
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+                    <View style="@style/RegisterDivStyle"/>
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        style="@style/RegisterLinearLayoutStyle">
+                        <TextView
+                            style="@style/RegisterTitleStyle"
+                            android:text="위치"/>
+                        <androidx.appcompat.widget.AppCompatEditText
+                            style="@style/RegisterEdittextStyle"
+                            android:id="@+id/et_location"
+                            android:inputType="text"
+                            android:hint="제품 위치"/>
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+                    <View style="@style/RegisterDivStyle"/>
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        style="@style/RegisterLinearLayoutStyle">
+                        <TextView
+                            style="@style/RegisterTitleStyle"
+                            android:text="초기수량"/>
+                        <androidx.appcompat.widget.AppCompatEditText
+                            style="@style/RegisterEdittextStyle"
+                            android:id="@+id/et_quantity"
+                            android:inputType="number"
+                            android:hint="초기수량 입력"/>
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <View style="@style/RegisterShortDivStyle"/>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    style="@style/RegisterShortLinearLayoutStyle"
+                    android:layout_marginTop="30dp">
+                    <androidx.appcompat.widget.AppCompatTextView
+                        style="@style/RegisterSubTopic"
+                        android:text="가격 정보" />
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        style="@style/RegisterLinearLayoutStyle"
+                        android:layout_marginTop="30dp">
+                        <TextView
+                            style="@style/RegisterTitleStyle"
+                            android:text="구매가격"/>
+                        <androidx.appcompat.widget.AppCompatEditText
+                            style="@style/RegisterEdittextStyle"
+                            android:id="@+id/et_purchase_price"
+                            android:inputType="number"
+                            android:hint="구매가격 입력"/>
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+                    <View style="@style/RegisterDivStyle"/>
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        style="@style/RegisterLinearLayoutStyle">
+                        <TextView
+                            style="@style/RegisterTitleStyle"
+                            android:text="판매가격"/>
+                        <androidx.appcompat.widget.AppCompatEditText
+                            style="@style/RegisterEdittextStyle"
+                            android:id="@+id/et_selling_price"
+                            android:inputType="number"
+                            android:hint="판매가격 입력"/>
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <View style="@style/RegisterShortDivStyle"/>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    style="@style/RegisterShortLinearLayoutStyle"
+                    android:layout_marginTop="30dp">
+                    <androidx.appcompat.widget.AppCompatTextView
+                        style="@style/RegisterSubTopic"
+                        android:text="기타 정보" />
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        style="@style/RegisterLinearLayoutStyle"
+                        android:layout_marginTop="30dp">
+                        <TextView
+                            style="@style/RegisterTitleStyle"
+                            android:text="카테고리"/>
+                        <androidx.appcompat.widget.AppCompatEditText
+                            style="@style/RegisterEdittextStyle"
+                            android:id="@+id/et_category"
+                            android:inputType="text"
+                            android:hint="카테고리 입력"/>
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+                    <View style="@style/RegisterDivStyle"/>
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        style="@style/RegisterLinearLayoutStyle">
+                        <TextView
+                            style="@style/RegisterTitleStyle"
+                            android:text="한줄메모"/>
+                        <androidx.appcompat.widget.AppCompatEditText
+                            style="@style/RegisterEdittextStyle"
+                            android:id="@+id/et_memo"
+                            android:inputType="text"
+                            android:hint="메모 입력"/>
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+                </androidx.appcompat.widget.LinearLayoutCompat>
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_confirm"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:background="@drawable/rounded_button"
+                    android:backgroundTint="#3F51B5"
+                    android:textColor="@color/white"
+                    android:textSize="18dp"
+                    android:onClick="@{(view) -> viewModel.onClickButton()}"
+                    android:fontFamily="@font/nanumextrabold"
+                    android:text="확인"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="50dp"
+                    app:layout_constraintBottom_toBottomOf="parent" />
+            </androidx.appcompat.widget.LinearLayoutCompat>
+        </ScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -22,6 +22,7 @@ import com.teamox.woongstock.common.DatabaseRepository
 import com.teamox.woongstock.databinding.FragmentInventoryListBinding
 import com.teamox.woongstock.recyclerview.ProductListRecyclerview
 import com.teamox.woongstock.view.InventoryRegistrationActivity
+import com.teamox.woongstock.view.ProductRegistrationActivity
 import com.teamox.woongstock.viewmodel.InventoryListViewModel
 
 class InventoryListFragment: Fragment(){
@@ -76,7 +77,7 @@ class InventoryListFragment: Fragment(){
         })
 
         viewModel.fabClickEvent.observe(viewLifecycleOwner, Observer {
-            val intent = Intent(requireContext(), InventoryRegistrationActivity::class.java)
+            val intent = Intent(requireContext(), ProductRegistrationActivity::class.java)
             launcher.launch(intent)
         })
 
