@@ -1,9 +1,11 @@
 package com.teamox.woongstock.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.SpannableString
 import android.text.Spanned
 import android.text.style.RelativeSizeSpan
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -17,28 +19,21 @@ import com.teamox.woongstock.viewmodel.ItemDetailViewModel
 class ItemDetailActivity: AppCompatActivity() {
     private lateinit var binding: ActivityItemDetailBinding
     private lateinit var viewModel: ItemDetailViewModel
+    private var productId: Int = 0
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_item_detail)
 
         val intent = getIntent()
-        viewModel = ItemDetailViewModel(DatabaseRepository(this), intent.getIntExtra("item_id", -1))
+        productId = intent.getIntExtra("item_id", -1)
+        viewModel = ItemDetailViewModel(DatabaseRepository(this), productId)
 
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
 
         setObserve()
-        //뼈대 작업할떄까지만 잠시
-//        viewModel.itemData.observe(this, Observer { product ->
-//            binding.tvProductName.text = product.name
-//            binding.tvProductPrice.text = reSize(product.price +"원", 0.8f, product.price.length)
-//            binding.tvProductQuantity.text = reSize(product.quantity +"개", 0.8f, product.quantity.length)
-//            Glide.with(this)
-//                .load(product.image)
-//                .transform(CenterCrop())
-//                .into(binding.ivProduct)
-//        })
     }
 
     fun setObserve(){
@@ -47,15 +42,39 @@ class ItemDetailActivity: AppCompatActivity() {
                 .load(it.image)
                 .transform(CenterCrop())
                 .into(binding.ivProduct)
-            binding.tvProductName.text = it.name
-            binding.tvProductLocation.text = it.location ?: "-"
-            binding.tvCategory.text = it.category ?: "-"
-            binding.tvPurchasePrice.text = it.purchasePrice ?: "-"
-            binding.tvSellingPrice.text = it.sellingPrice ?: "-"
-            binding.tvStockDate.text = it.stockDate ?: "-"
-            binding.tvShippingDate.text = it.shippingDate ?: "-"
-            binding.tvProductQuantity.text = it.quantity
+            binding.tvProductName.text = viewModel.checkNullData(it.name)
+            binding.tvProductLocation.text = viewModel.checkNullData(it.location)
+            binding.tvCategory.text = viewModel.checkNullData(it.category)
+            binding.tvPurchasePrice.text = viewModel.checkNullData(it.purchasePrice)
+            binding.tvSellingPrice.text = viewModel.checkNullData(it.sellingPrice)
+            binding.tvStockDate.text = viewModel.checkNullData(it.stockDate)
+            binding.tvShippingDate.text = viewModel.checkNullData(it.shippingDate)
+            binding.tvProductQuantity.text = viewModel.checkNullData(it.quantity)
+            binding.tvMemo.text = viewModel.checkNullData(it.memo)
         })
+
+        viewModel.marginRate.observe(this, Observer {
+            binding.tvMarginRate.text = it ?: "-"
+        })
+
+        viewModel.btnLogisticsEvent.observe(this, Observer {
+            val intent = Intent(this, LogisticsActivity::class.java)
+            intent.putExtra("item_id", productId)
+            startActivity(intent)
+        })
+
+        viewModel.allProduct.observe(this) { products ->
+            updateUI()
+        }
+    }
+
+    private fun updateUI() {
+        // 리스트 새로고침
+        Toast.makeText(this, "앱을 찾을 수 없습니다: $packageName", Toast.LENGTH_SHORT).show()
+    }
+
+    fun setData(string: String): String{
+        return viewModel.checkNullData(string)
     }
 
     fun reSize(text: String, size: Float, start: Int): SpannableString{

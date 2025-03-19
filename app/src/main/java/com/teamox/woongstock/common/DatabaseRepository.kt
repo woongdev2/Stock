@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import androidx.room.Room
 import com.teamox.woongstock.activity.AppDatabase
+import com.teamox.woongstock.model.ProductDao
 
 class DatabaseRepository(private val context: Context) {
     fun getDatabase(): AppDatabase {
@@ -29,4 +30,9 @@ class DatabaseRepository(private val context: Context) {
 
         editor.commit()
     }
+
+    suspend fun updateQuantityAndLog(productId: Int, newQuantity: String, date: String, type: String, client: String, memo: String, quantity: String) {
+        getDatabase().productDao().updateQuantityAndInsertLogistics(productId, newQuantity, date, type, client, memo, quantity)
+    }
+
 }

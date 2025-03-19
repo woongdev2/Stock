@@ -14,6 +14,14 @@ class ItemDetailViewModel(private val databaseRepository: DatabaseRepository, pr
     private var _itemData = MutableLiveData<ProductTable>()
     val itemData: LiveData<ProductTable> = _itemData
 
+    private var _marginRate = MutableLiveData<String>()
+    val marginRate: LiveData<String> = _marginRate
+
+    private val _btnLogisticsEvent = MutableLiveData<Unit>()
+    val btnLogisticsEvent: LiveData<Unit> get() = _btnLogisticsEvent
+
+    val allProduct: LiveData<List<ProductTable>> = databaseRepository.getDatabase().productDao().getAllProducts()
+
     init {
         getDatabase()
     }
@@ -21,8 +29,36 @@ class ItemDetailViewModel(private val databaseRepository: DatabaseRepository, pr
     fun getDatabase(){
         val db = databaseRepository.getDatabase().productDao()
         CoroutineScope(Dispatchers.IO).launch {
-            Log.e("myLogGetDatabase","${db.getProduct(productId).name}")
-            _itemData.postValue(db.getProduct(productId))
+            val product= db.getProduct(productId)
+            _itemData.postValue(product)
+            if(product.purchasePrice.toDoubleOrNull() != null && product.sellingPrice.toDoubleOrNull() != null){
+                setMarginData(product.purchasePrice.toDouble(), product.sellingPrice.toDouble())
+            } else{
+                _marginRate.postValue("-")
+            }
         }
+
+        val product = db.getAllProducts()
+    }
+
+    fun setMarginData(purchasePrice: Double, sellingPrice: Double){
+        _marginRate.postValue(calculateMarginRate(purchasePrice, sellingPrice))
+    }
+
+    fun calculateMarginRate(purchasePrice: Double, sellingPrice: Double): String {
+        val margin = sellingPrice - purchasePrice
+        return String.format("%.1f", (margin / sellingPrice) * 100)
+    }
+
+    fun checkNullData(string: String): String{
+        if(string.isNullOrBlank()){
+            return "-"
+        } else{
+            return string
+        }
+    }
+
+    fun onClickLogisticsBtn(){
+        _btnLogisticsEvent.value = Unit
     }
 }

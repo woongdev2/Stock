@@ -78,6 +78,7 @@
                             style="@style/RegisterEdittextStyle"
                             android:id="@+id/et_location"
                             android:inputType="text"
+                            android:text="@={viewModel.location}"
                             android:hint="제품 위치"/>
                     </androidx.appcompat.widget.LinearLayoutCompat>
                     <View style="@style/RegisterDivStyle"/>
@@ -90,6 +91,7 @@
                             style="@style/RegisterEdittextStyle"
                             android:id="@+id/et_quantity"
                             android:inputType="number"
+                            android:text="@={viewModel.quantity}"
                             android:hint="초기수량 입력"/>
                     </androidx.appcompat.widget.LinearLayoutCompat>
                 </androidx.appcompat.widget.LinearLayoutCompat>
@@ -112,6 +114,7 @@
                             style="@style/RegisterEdittextStyle"
                             android:id="@+id/et_purchase_price"
                             android:inputType="number"
+                            android:text="@={viewModel.purchasePrice}"
                             android:hint="구매가격 입력"/>
                     </androidx.appcompat.widget.LinearLayoutCompat>
                     <View style="@style/RegisterDivStyle"/>
@@ -124,6 +127,7 @@
                             style="@style/RegisterEdittextStyle"
                             android:id="@+id/et_selling_price"
                             android:inputType="number"
+                            android:text="@={viewModel.sellingPrice}"
                             android:hint="판매가격 입력"/>
                     </androidx.appcompat.widget.LinearLayoutCompat>
                 </androidx.appcompat.widget.LinearLayoutCompat>
@@ -146,6 +150,7 @@
                             style="@style/RegisterEdittextStyle"
                             android:id="@+id/et_category"
                             android:inputType="text"
+                            android:text="@={viewModel.category}"
                             android:hint="카테고리 입력"/>
                     </androidx.appcompat.widget.LinearLayoutCompat>
                     <View style="@style/RegisterDivStyle"/>
@@ -158,6 +163,7 @@
                             style="@style/RegisterEdittextStyle"
                             android:id="@+id/et_memo"
                             android:inputType="text"
+                            android:text="@={viewModel.memo}"
                             android:hint="메모 입력"/>
                     </androidx.appcompat.widget.LinearLayoutCompat>
                 </androidx.appcompat.widget.LinearLayoutCompat>

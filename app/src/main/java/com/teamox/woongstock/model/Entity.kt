@@ -16,5 +16,17 @@ data class ProductTable(
     @ColumnInfo val shippingDate: String,
     @ColumnInfo val purchasePrice: String,
     @ColumnInfo val sellingPrice: String,
-    @ColumnInfo val quantity: String
+    @ColumnInfo val quantity: String,
+    @ColumnInfo val memo: String
+)
+
+@Entity(tableName = "logistics_table")
+data class LogisticsTable(
+    @PrimaryKey(autoGenerate = true) val id: Int,
+    val productId: Int,
+    val date: String,
+    val type: String,
+    val client: String,
+    val memo: String,
+    val quantity: String
 )

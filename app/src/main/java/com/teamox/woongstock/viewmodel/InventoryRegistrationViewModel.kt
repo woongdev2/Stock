@@ -54,7 +54,8 @@ class InventoryRegistrationViewModel(private val databaseRepository: DatabaseRep
             "",
             "",
             price.value!!,
-            quantity.value!!)
+            quantity.value!!,
+            "")
 
         CoroutineScope(Dispatchers.IO).launch {
         val db = databaseRepository.getDatabase().productDao()

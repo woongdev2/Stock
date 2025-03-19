@@ -1,5 +1,6 @@
 package com.teamox.woongstock.viewmodel
 
+import android.os.Build
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -8,6 +9,8 @@ import com.teamox.woongstock.model.ProductTable
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 class ProductRegistrationViewModel(private val databaseRepository: DatabaseRepository) : ViewModel() {
     lateinit var _image: String
@@ -33,6 +36,17 @@ class ProductRegistrationViewModel(private val databaseRepository: DatabaseRepos
             // Toast메시지 남겨주기?
         }
     }
+
+    fun getTodayDate(): String {
+        val today = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            LocalDate.now()
+        } else {
+            TODO("VERSION.SDK_INT < O")
+        }
+        val formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd")
+        return today.format(formatter)
+    }
+
     private fun inputProduct(){
         if(!::_image.isInitialized) {
             _image = "-"
@@ -44,14 +58,15 @@ class ProductRegistrationViewModel(private val databaseRepository: DatabaseRepos
             id,
             title.value!!,
             _image,
+            location.value ?: "",
+            category.value ?:"",
             "",
+            getTodayDate(),
             "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "")
+            purchasePrice.value ?:"",
+            sellingPrice.value ?:"",
+            quantity.value ?:"",
+            memo.value ?:"")
 
         CoroutineScope(Dispatchers.IO).launch {
             val db = databaseRepository.getDatabase().productDao()

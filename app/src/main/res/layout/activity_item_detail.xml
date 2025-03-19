@@ -101,6 +101,7 @@
                             android:layout_marginRight="25dp"
                             android:gravity="center"
                             android:orientation="vertical"
+                            android:onClick="@{(view) -> viewModel.onClickLogisticsBtn()}"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintLeft_toLeftOf="parent"
                             app:layout_constraintRight_toLeftOf="@+id/li_center"
