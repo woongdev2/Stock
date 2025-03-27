@@ -58,6 +58,12 @@
         <activity android:name=".view.InventoryRegistrationActivity"
             android:windowSoftInputMode="stateVisible|adjustResize"/>
         <activity android:name=".activity.TestActivity"/>
+        <activity android:name=".test.TestFirstActivity"
+            android:exported="true"
+            android:windowSoftInputMode="adjustPan" >
+
+        </activity>
+        <activity android:name=".test.TestSecondActivity"/>
 
         <activity android:name=".view.LogisticsActivity"
             android:exported="true"

@@ -2,10 +2,8 @@ package com.teamox.woongstock.view
 
 import android.content.Intent
 import android.os.Bundle
-import android.text.SpannableString
-import android.text.Spanned
-import android.text.style.RelativeSizeSpan
-import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -19,8 +17,9 @@ import com.teamox.woongstock.viewmodel.ItemDetailViewModel
 class ItemDetailActivity: AppCompatActivity() {
     private lateinit var binding: ActivityItemDetailBinding
     private lateinit var viewModel: ItemDetailViewModel
+    private lateinit var resultLauncher: ActivityResultLauncher<Intent>
+    private lateinit var newQuantity: String
     private var productId: Int = 0
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,10 +32,15 @@ class ItemDetailActivity: AppCompatActivity() {
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
 
-        setObserve()
+        init()
     }
 
-    fun setObserve(){
+    private fun init(){
+        setObserve()
+        setResultLauncher()
+    }
+
+    private fun setObserve(){
         viewModel.itemData.observe(this, Observer {
             Glide.with(this)
                 .load(it.image)
@@ -60,27 +64,21 @@ class ItemDetailActivity: AppCompatActivity() {
         viewModel.btnLogisticsEvent.observe(this, Observer {
             val intent = Intent(this, LogisticsActivity::class.java)
             intent.putExtra("item_id", productId)
-            startActivity(intent)
+            resultLauncher.launch(intent)
         })
+    }
 
-        viewModel.allProduct.observe(this) { products ->
-            updateUI()
+    private fun setResultLauncher(){
+        resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == RESULT_OK) {
+                newQuantity = result.data?.getStringExtra("resultKey") ?: ""
+                if(!newQuantity.isNullOrEmpty()) updateUI(newQuantity)
+                setResult(RESULT_OK)
+            }
         }
     }
 
-    private fun updateUI() {
-        // 리스트 새로고침
-        Toast.makeText(this, "앱을 찾을 수 없습니다: $packageName", Toast.LENGTH_SHORT).show()
-    }
-
-    fun setData(string: String): String{
-        return viewModel.checkNullData(string)
-    }
-
-    fun reSize(text: String, size: Float, start: Int): SpannableString{
-        val spannableString = SpannableString(text)
-        spannableString.setSpan(RelativeSizeSpan(size), start, text.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
-
-        return spannableString
+    private fun updateUI(newData: String) {
+        binding.tvProductQuantity.text = newData
     }
 }

@@ -3,10 +3,16 @@ package com.teamox.woongstock.common
 import android.content.Context
 import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
+import android.widget.Toast
 import androidx.room.Room
 import com.teamox.woongstock.activity.AppDatabase
 
 object CWFunction {
+
+    val toastMessage: (Context, String) -> Unit = { context, message ->
+        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+    }
+
     fun getDatabase(context: Context): AppDatabase {
         val db = Room.databaseBuilder(
             context,

@@ -12,16 +12,20 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
+import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.teamox.woongstock.R
+import com.teamox.woongstock.common.CWFunction
 import com.teamox.woongstock.common.DatabaseRepository
 import com.teamox.woongstock.databinding.FragmentInventoryListBinding
 import com.teamox.woongstock.recyclerview.ProductListRecyclerview
 import com.teamox.woongstock.view.InventoryRegistrationActivity
+import com.teamox.woongstock.view.ItemDetailActivity
 import com.teamox.woongstock.view.ProductRegistrationActivity
 import com.teamox.woongstock.viewmodel.InventoryListViewModel
 
@@ -37,7 +41,6 @@ class InventoryListFragment: Fragment(){
         }
     }
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         mContext = requireContext()
@@ -51,7 +54,6 @@ class InventoryListFragment: Fragment(){
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         init()
     }
 
@@ -72,7 +74,12 @@ class InventoryListFragment: Fragment(){
 
     private fun setObserve(){
         viewModel.items.observe(viewLifecycleOwner, Observer{
-            rvProductListAdapter = ProductListRecyclerview(it, mContext)
+            rvProductListAdapter = ProductListRecyclerview(it, mContext){ item ->
+                val intent = Intent(mContext, ItemDetailActivity::class.java)
+                intent.putExtra("item_id", item)
+                launcher.launch(intent)
+            }
+
             binding.rvProductList.adapter = rvProductListAdapter
         })
 

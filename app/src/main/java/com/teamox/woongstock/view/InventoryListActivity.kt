@@ -46,7 +46,7 @@ class InventoryListActivity : AppCompatActivity() {
 
     private fun setObserve(){
         viewModel.items.observe(this, Observer{
-            rvProductListAdapter = ProductListRecyclerview(it, mContext)
+//            rvProductListAdapter = ProductListRecyclerview(it, mContext)
             binding.rvProductList.adapter = rvProductListAdapter
         })
 

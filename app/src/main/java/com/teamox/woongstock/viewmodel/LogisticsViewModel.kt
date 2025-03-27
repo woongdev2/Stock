@@ -16,8 +16,8 @@ class LogisticsViewModel(private val databaseRepository: DatabaseRepository, pri
     var type = "in"
     var client = MutableLiveData<String>()
     var memo = MutableLiveData<String>()
-    private val _finishEvent = MutableLiveData<Boolean>()
-    val finishEvent: LiveData<Boolean> get() = _finishEvent
+    private val _finishEvent = MutableLiveData<String>()
+    val finishEvent: LiveData<String> = _finishEvent
 
     fun onClickPlus(){
        _quantity.value = (quantity.value!!.toInt() + 1).toString()
@@ -33,7 +33,7 @@ class LogisticsViewModel(private val databaseRepository: DatabaseRepository, pri
             databaseRepository.
             updateQuantityAndLog(productId, newQuantity.toString(),date.value?:"",type,client.value?:"",memo.value?:"",quantity.value!!)
             withContext(Dispatchers.Main) {
-                _finishEvent.value = true
+                _finishEvent.value = newQuantity.toString()
             }
         }
     }

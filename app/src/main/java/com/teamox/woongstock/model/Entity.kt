@@ -30,3 +30,16 @@ data class LogisticsTable(
     val memo: String,
     val quantity: String
 )
+
+data class HistoryList(
+    val logisticsId: Int,
+    val productId: Int,
+    val increment: String,
+    val date: String,
+    val type: String,
+    val client: String,
+    val memo: String,
+    val productQuantity: String,
+    val productName: String,
+    val productImage: String
+)

@@ -2,6 +2,7 @@ package com.teamox.woongstock.view
 
 import android.app.DatePickerDialog
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.text.InputType
 import android.widget.EditText
@@ -52,7 +53,6 @@ class LogisticsActivity: AppCompatActivity() {
                 val selectedCalendar = Calendar.getInstance()
                 selectedCalendar.set(selectedYear, selectedMonth, selectedDay)
 
-                // SimpleDateFormat을 사용하여 원하는 형식으로 변환
                 val dateFormat = SimpleDateFormat("yyyy.MM.dd", Locale.getDefault())
                 val formattedDate = dateFormat.format(selectedCalendar.time)
 
@@ -82,9 +82,14 @@ class LogisticsActivity: AppCompatActivity() {
 
         })
 
-        viewModel.finishEvent.observe(this,{
+        viewModel.finishEvent.observe(this) {
+            val resultData = it
+            val intent = Intent().apply {
+                putExtra("resultKey", resultData)
+            }
+            setResult(RESULT_OK, intent) // 결과 전달
             finish()
-        })
+        }
     }
 
     fun showInputDialog(context: Context, title: String, message: String, onTextEntered: (String) -> Unit) {
@@ -98,7 +103,7 @@ class LogisticsActivity: AppCompatActivity() {
 
         builder.setPositiveButton("확인") { dialog, _ ->
             val text = input.text.toString()
-            onTextEntered(text) // 입력된 텍스트를 콜백 함수로 전달
+            onTextEntered(text)
             dialog.dismiss()
         }
         builder.setNegativeButton("취소") { dialog, _ ->

@@ -20,8 +20,6 @@ class ItemDetailViewModel(private val databaseRepository: DatabaseRepository, pr
     private val _btnLogisticsEvent = MutableLiveData<Unit>()
     val btnLogisticsEvent: LiveData<Unit> get() = _btnLogisticsEvent
 
-    val allProduct: LiveData<List<ProductTable>> = databaseRepository.getDatabase().productDao().getAllProducts()
-
     init {
         getDatabase()
     }
@@ -37,8 +35,6 @@ class ItemDetailViewModel(private val databaseRepository: DatabaseRepository, pr
                 _marginRate.postValue("-")
             }
         }
-
-        val product = db.getAllProducts()
     }
 
     fun setMarginData(purchasePrice: Double, sellingPrice: Double){
