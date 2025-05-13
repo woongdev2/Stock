@@ -152,6 +152,16 @@
         <item name="android:paddingRight">4dp</item>
     </style>
 
+    <style name="PriceTextGreenStyle" parent="BasicTextStyle">
+        <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:background">@drawable/rounded_textview_version_green</item>
+        <item name="android:textColor">#389E0D</item>
+        <item name="android:paddingTop">2dp</item>
+        <item name="android:paddingBottom">2dp</item>
+        <item name="android:paddingLeft">4dp</item>
+        <item name="android:paddingRight">4dp</item>
+    </style>
+
     <style name="DetailDivStyle">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">8dp</item>
@@ -237,4 +247,60 @@
         <item name="android:textSize">18dp</item>
         <item name="android:fontFamily">@font/nanumextrabold</item>
     </style>
+
+    <style name="SettingLinearStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:foreground">?attr/selectableItemBackground</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
+
+    <style name="SettingTextStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+    </style>
+
+    <style name="SettingImageStyle">
+        <item name="android:layout_width">24dp</item>
+        <item name="android:layout_height">24dp</item>
+        <item name="android:src">@drawable/enter</item>
+    </style>
+
+    <style name="ActionbarCloseButton">
+        <item name="android:layout_width">24dp</item>
+        <item name="android:layout_height">24dp</item>
+        <item name="android:src">@drawable/toolbar_close</item>
+        <item name="android:scaleType">fitXY</item>
+        <item name="android:layout_marginLeft">16dp</item>
+        <item name="android:background">@color/transparent</item>
+    </style>
+
+    <style name="LogiTextView">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:textSize">16dp</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:layout_marginLeft">16dp</item>
+    </style>
+
+    <style name="LogiButton">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">38dp</item>
+        <item name="android:background">@drawable/rounded_button_for_logi</item>
+        <item name="android:textColor">@color/logistics_text_gray</item>
+        <item name="android:layout_marginRight">16dp</item>
+    </style>
+
+    <style name="LogiDiv">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">0.5dp</item>
+        <item name="android:background">#F1F1F1</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:layout_marginLeft">16dp</item>
+        <item name="android:layout_marginRight">16dp</item>
+    </style>
+
 </resources>

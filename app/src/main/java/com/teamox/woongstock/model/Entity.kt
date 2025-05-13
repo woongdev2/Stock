@@ -28,7 +28,8 @@ data class LogisticsTable(
     val type: String,
     val client: String,
     val memo: String,
-    val quantity: String
+    val existingQuantity: String,
+    val increment: String
 )
 
 data class HistoryList(
@@ -39,7 +40,14 @@ data class HistoryList(
     val type: String,
     val client: String,
     val memo: String,
-    val productQuantity: String,
+    val existingQuantity: String,
+    val productName: String,
+    val productImage: String
+)
+
+data class ProductIncrement(
+    val productId: Int,
+    val totalIncrement: Int,
     val productName: String,
     val productImage: String
 )

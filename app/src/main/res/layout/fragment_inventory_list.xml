@@ -16,7 +16,6 @@
             android:id="@+id/action_bar_section"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent">
-
             <androidx.appcompat.widget.AppCompatTextView
                 style="@style/Basic_title"
                 android:text="제품 목록"

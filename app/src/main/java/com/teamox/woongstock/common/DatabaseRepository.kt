@@ -31,8 +31,8 @@ class DatabaseRepository(private val context: Context) {
         editor.commit()
     }
 
-    suspend fun updateQuantityAndLog(productId: Int, newQuantity: String, date: String, type: String, client: String, memo: String, quantity: String) {
-        getDatabase().productDao().updateQuantityAndInsertLogistics(productId, newQuantity, date, type, client, memo, quantity)
+    suspend fun updateQuantityAndLog(productId: Int, newQuantity: String, date: String, type: String, client: String, memo: String, existingQuantity: String, increment: String) {
+        getDatabase().productDao().updateQuantityAndInsertLogistics(productId, newQuantity, date, type, client, memo, existingQuantity, increment)
     }
 
 }

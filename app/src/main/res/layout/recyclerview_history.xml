@@ -22,25 +22,35 @@
         app:layout_constraintBottom_toBottomOf="parent"/>
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_product_name"
+        android:id="@+id/tv_product_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
         android:textSize="16dp"
-        android:text="테스트...."
+        android:text="제품명"
         android:fontFamily="@font/nanumextrabold"
         app:layout_constraintLeft_toRightOf="@id/iv_product"
         app:layout_constraintTop_toTopOf="@id/iv_product" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_product_price"
+        android:id="@+id/tv_date"
         style="@style/PriceTextStyle"
         android:layout_marginTop="5dp"
-        android:text="테스트가격...."
+        android:text="제품 가격"
         app:layout_constraintLeft_toRightOf="@id/iv_product"
-        app:layout_constraintTop_toBottomOf="@id/tv_product_name"/>
+        app:layout_constraintTop_toBottomOf="@id/tv_product_title"/>
 
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_client"
+        style="@style/PriceTextGreenStyle"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="5dp"
+        android:text="클라이언트"
+        app:layout_constraintLeft_toRightOf="@id/tv_date"
+        app:layout_constraintTop_toBottomOf="@id/tv_product_title"/>
+
+<!--    잠시 구도선 -->
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_product_quantity"
         android:layout_width="wrap_content"
@@ -48,19 +58,42 @@
         android:layout_marginRight="3dp"
         android:fontFamily="@font/nanumextrabold"
         android:textSize="16dp"
-        app:layout_constraintRight_toLeftOf="@+id/tv_product_unit"
+        android:text="61"
+        app:layout_constraintRight_toLeftOf="@+id/iv_right_arrow"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_right_arrow"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@drawable/right_arrow"
+        android:layout_marginRight="3dp"
+        app:layout_constraintRight_toLeftOf="@id/tv_product_new_quantity"
+        app:layout_constraintTop_toTopOf="@id/tv_product_quantity"
+        app:layout_constraintBottom_toBottomOf="@id/tv_product_quantity"/>
+
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_product_unit"
+        android:id="@+id/tv_product_new_quantity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="10dp"
-        android:fontFamily="@font/nanum"
-        android:text="개"
+        android:layout_marginRight="3dp"
+        android:textSize="16dp"
+        android:fontFamily="@font/nanumextrabold"
+        android:text="61"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toBottomOf="@id/tv_product_quantity"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_delta_value"
+        style="@style/PriceTextGreenStyle"
+        android:text="+32"
+        android:layout_marginLeft="0dp"
+        android:layout_marginBottom="3dp"
+        app:layout_constraintLeft_toLeftOf="@id/iv_right_arrow"
+        app:layout_constraintRight_toRightOf="@id/iv_right_arrow"
+        app:layout_constraintBottom_toTopOf="@id/iv_right_arrow"/>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

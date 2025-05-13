@@ -10,28 +10,29 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class LogisticsViewModel(private val databaseRepository: DatabaseRepository, private val productId: Int): ViewModel() {
-    val _quantity = MutableLiveData<String>("0")
-    var quantity: LiveData<String> = _quantity
-    var date = MutableLiveData<String>()
+    val _increment = MutableLiveData<String>("0")
+    var increment: LiveData<String> = _increment
+    var date = MutableLiveData<String>("현재 시간")
     var type = "in"
-    var client = MutableLiveData<String>()
-    var memo = MutableLiveData<String>()
+    var client = MutableLiveData<String>("작성")
+    var memo = MutableLiveData<String>("작성")
     private val _finishEvent = MutableLiveData<String>()
     val finishEvent: LiveData<String> = _finishEvent
 
     fun onClickPlus(){
-       _quantity.value = (quantity.value!!.toInt() + 1).toString()
+       _increment.value = (increment.value!!.toInt() + 1).toString()
     }
 
     fun onClickMinus(){
-        _quantity.postValue((quantity.value!!.toInt() - 1).toString())
+        _increment.postValue((increment.value!!.toInt() - 1).toString())
     }
 
     fun onClickConfirm(){
         viewModelScope.launch(Dispatchers.IO) {
-            val newQuantity = databaseRepository.getDatabase().productDao().getProduct(productId).quantity.toInt() + quantity.value!!.toInt()
+            val existingQuantity = databaseRepository.getDatabase().productDao().getProduct(productId).quantity.toInt()
+            val newQuantity = existingQuantity + increment.value!!.toInt()
             databaseRepository.
-            updateQuantityAndLog(productId, newQuantity.toString(),date.value?:"",type,client.value?:"",memo.value?:"",quantity.value!!)
+            updateQuantityAndLog(productId, newQuantity.toString(),date.value?:"",type,client.value?:"",memo.value?:"",existingQuantity.toString()?:"", increment.value?:"")
             withContext(Dispatchers.Main) {
                 _finishEvent.value = newQuantity.toString()
             }

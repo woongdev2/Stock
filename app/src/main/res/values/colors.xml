@@ -12,4 +12,8 @@
     <color name="hint_color">#8a8386</color>
     <color name="edit_text_bottom_color">#c0bec0</color>
     <color name="main_div_color">#efefef</color>
+    <color name="textview_type_in">#C8102E</color>
+    <color name="textview_type_out">#3376C7</color>
+    <color name="logistics_background_gray">#F0F0F0</color>
+    <color name="logistics_text_gray">#424242</color>
 </resources>

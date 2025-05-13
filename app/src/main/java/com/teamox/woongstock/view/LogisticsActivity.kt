@@ -75,11 +75,10 @@ class LogisticsActivity: AppCompatActivity() {
 
     }
     fun setObserve(){
-        viewModel.quantity.observe(this, Observer {
-            if (binding.etQuantity.text.toString() != it) { // 조건 추가
+        viewModel.increment.observe(this, Observer {
+            if (binding.etQuantity.text.toString() != it) {
                 binding.etQuantity.setText(it)
             }
-
         })
 
         viewModel.finishEvent.observe(this) {
@@ -87,7 +86,7 @@ class LogisticsActivity: AppCompatActivity() {
             val intent = Intent().apply {
                 putExtra("resultKey", resultData)
             }
-            setResult(RESULT_OK, intent) // 결과 전달
+            setResult(RESULT_OK, intent)
             finish()
         }
     }
